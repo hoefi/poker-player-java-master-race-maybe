@@ -17,7 +17,7 @@ public class Player {
     	catch(Exception e){
     		System.out.println(e.getLocalizedMessage());
     	}
-        return 205;
+        return (int) (Math.random()*1000);
     }
 
     public static void showdown(JsonElement game) {

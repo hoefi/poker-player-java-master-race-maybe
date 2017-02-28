@@ -20,7 +20,7 @@ public class Player {
     			
 				for (JsonElement player : playersArray) {
 
-					if (!player.getAsJsonObject().get("name").equals("Java Master Race Maybe")) {
+					if (!player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")) {
 						int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 						if (playerBet > highestBid) {
 							highestBid = (playerBet + 5);
@@ -30,7 +30,7 @@ public class Player {
 				boolean wasOnceInside = false;
     			
     			for(JsonElement player : playersArray){
-    				if(player.getAsJsonObject().get("name").equals("Java Master Race Maybe")){
+    				if(player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")){
     					wasOnceInside = true;
     					
     					JsonElement cardsElement = player.getAsJsonObject().get("hole_cards");

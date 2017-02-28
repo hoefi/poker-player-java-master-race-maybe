@@ -13,13 +13,14 @@ import java.io.FileReader;
 
 public class PlayerTest {
 
-	@Ignore
     @Test
     public void testBetRequest() throws Exception {
 
+    	Player player = new Player();
         JsonElement jsonElement = new JsonParser().parse(new FileReader("/Users/mpailer/git/poker-player-java-master-race-maybe/src/test/java/org/leanpoker/player/test.json"));
 
-        jsonElement.getAsJsonObject().get("players");
+        player.betRequest(jsonElement);
+        
         Assert.assertNotNull(jsonElement);
         assertEquals(0, Player.betRequest(jsonElement));
 

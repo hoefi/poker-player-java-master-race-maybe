@@ -43,7 +43,7 @@ public class Player {
 							playOn = playOn(rankCard1, rankCard2);
 							
 							if(playOn){
-								return highestBid;
+								return 150;
 							}
 						}
     				}

@@ -1,5 +1,9 @@
 package org.leanpoker.player;
 
+import org.leanpoker.communityCards.Card;
+import org.leanpoker.communityCards.CommunityCards;
+import org.leanpoker.communityCards.OwnCards;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
@@ -8,9 +12,11 @@ public class Player {
     static final String VERSION = "Default Java folding player";
 
     public static int betRequest(JsonElement request) {
+    	
+    	CommunityCards communityCards = new CommunityCards(request);
+    	OwnCards ownCards = new OwnCards(request);
+    	
     	try{
-    		//int maxBidAmount = 300;
-    		
     		JsonElement playersElement = request.getAsJsonObject().get("players");
     		boolean playOn = false;
     		
@@ -24,34 +30,17 @@ public class Player {
 					if (!player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")) {
 						int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 						if (playerBet > highestBid) {
-							//if(playerBet < maxBidAmount){
 								highestBid = playerBet;
 								System.err.println("Set highest bid to: " + highestBid);
 						}
 					}
 				}
-    			
-    			for(JsonElement player : playersArray){
-    				if(player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")){
-    					
-    					JsonElement cardsElement = player.getAsJsonObject().get("hole_cards");
-						if(cardsElement.isJsonArray()){
-							JsonArray  cardsArray = cardsElement.getAsJsonArray();
-							int rankCard1 = mapRankToInteger(cardsArray.get(0).getAsJsonObject().get("rank").getAsString());
-							String colorCard1 = cardsArray.get(0).getAsJsonObject().get("suit").getAsString();
-							int rankCard2 = mapRankToInteger(cardsArray.get(1).getAsJsonObject().get("rank").getAsString());
-							String colorCard2 = cardsArray.get(1).getAsJsonObject().get("suit").getAsString();
-							
-							System.err.println("Card1:" + rankCard1);
-							System.err.println("Card1:" + colorCard1);
-							System.err.println("Card2:" + rankCard2);
-							System.err.println("Card2:" + colorCard2);
-							
-							playOn = isHighPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2)|| isSameColorAndHighCard(rankCard1, rankCard2, colorCard1, colorCard2);
-						}
-    				} 
-    			}
-    			
+				
+				Card card1 = ownCards.getCardList().get(0);
+				Card card2 = ownCards.getCardList().get(1);
+				
+				playOn = isHighPair(card1, card2) || isHighCard(card1, card2) || isSameColorAndHighCard(card1, card2);
+
     			System.err.println("Palying on: " + playOn);
     			
     			if(playOn){
@@ -59,7 +48,6 @@ public class Player {
     			} else {
     				return 0;
     			}
-    			
     		}
     		
     	}
@@ -69,17 +57,17 @@ public class Player {
         return 0;
     }
 
-    private static boolean isHighPair(int rankCard1, int rankCard2){
-    	return (rankCard1 > 6) && (rankCard1 == rankCard2);
+    private static boolean isHighPair(Card card1, Card card2){
+    	return (card1.getRank() > 6) && (card1.getRank() == card2.getRank());
     }
     
-	private static boolean isHighCard(int rankCard1, int rankCard2) {
-		return (rankCard1 >= 10 && rankCard2 >= 10);
+	private static boolean isHighCard(Card card1, Card card2) {
+		return (card1.getRank() >= 10 && card2.getRank() >= 10);
 	}
 	
-	private static boolean isSameColorAndHighCard(int rankCard1, int rankCard2, String colorCard1, String colorCard2) {
+	private static boolean isSameColorAndHighCard(Card card1, Card card2) {
 		boolean playOn = false;
-		if(colorCard1.equals(colorCard2) && (rankCard1 >= 10 || rankCard2 >= 10)){
+		if(card1.getSuit().equals(card2.getSuit()) && (card1.getRank() >= 10 || card2.getRank() >= 10)){
 			playOn = true;
 		}
 		return playOn;

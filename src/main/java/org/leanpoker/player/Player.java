@@ -10,7 +10,6 @@ public class Player {
     public static int betRequest(JsonElement request) {
     	try{
     		JsonElement playersElement = request.getAsJsonObject().get("players");
-    		
     		boolean playOn = false;
     		
     		if(playersElement.isJsonArray()){
@@ -23,15 +22,14 @@ public class Player {
 					if (!player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")) {
 						int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 						if (playerBet > highestBid) {
-							highestBid = (playerBet + 5);
+							highestBid = playerBet;
+							System.err.println("Set highest bid to: " + highestBid);
 						}
 					}
 				}
-				boolean wasOnceInside = false;
     			
     			for(JsonElement player : playersArray){
     				if(player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")){
-    					wasOnceInside = true;
     					
     					JsonElement cardsElement = player.getAsJsonObject().get("hole_cards");
 						if(cardsElement.isJsonArray()){
@@ -47,14 +45,13 @@ public class Player {
     				} 
     			}
     			
+    			System.err.println(playOn);
+    			
     			if(playOn){
-    				return 175;
-    			} else if (wasOnceInside){
-    				return 150;
+    				return highestBid + 5;
     			} else {
     				return 0;
     			}
-    			
     			
     		}
     		

@@ -26,7 +26,6 @@ public class Player {
 							highestBid = (playerBet + 5);
 						}
 					}
-
 				}
     			
     			for(JsonElement player : playersArray){
@@ -46,6 +45,8 @@ public class Player {
 								return 175;
 							}
 						}
+    				} else {
+    					return 750;
     				}
     			}
     				

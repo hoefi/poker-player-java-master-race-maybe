@@ -40,7 +40,7 @@ public class Player {
 							System.err.println("Card1:" + rankCard1);
 							System.err.println("Card2:" + rankCard2);
 							
-							playOn = isPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2);
+							playOn = isHighPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2);
 						}
     				} 
     			}
@@ -62,11 +62,15 @@ public class Player {
         return 0;
     }
 
-    private static boolean isPair(int rankCard1, int rankCard2){
-    	return rankCard1 == rankCard2;
+    private static boolean isHighPair(int rankCard1, int rankCard2){
+    	return (rankCard1 > 6) && (rankCard1 == rankCard2);
     }
     
 	private static boolean isHighCard(int rankCard1, int rankCard2) {
+		return (rankCard1 >= 10 && rankCard2 >= 10);
+	}
+	
+	private static boolean isHighSameColorAndHighCard(int rankCard1, int rankCard2) {
 		return (rankCard1 >= 10 && rankCard2 >= 10);
 	}
 

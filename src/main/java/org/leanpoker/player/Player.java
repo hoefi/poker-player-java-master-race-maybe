@@ -9,10 +9,11 @@ public class Player {
 
     public static int betRequest(JsonElement request) {
     	try{
-    		JsonArray asJsonArray = request.getAsJsonArray();
-    		for(Object o : asJsonArray){
-    			System.out.println(o.toString());
+    		JsonElement c = request.getAsJsonObject().get("players");
+    		if (c != null){
+    			return 500;
     		}
+    		
     	}
     	catch(Exception e){
     		System.out.println(e.getLocalizedMessage());

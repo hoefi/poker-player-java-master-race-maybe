@@ -39,7 +39,7 @@ public class Player {
 				Card card1 = ownCards.getCardList().get(0);
 				Card card2 = ownCards.getCardList().get(1);
 				
-				playOn = isHighPair(card1, card2);
+				playOn = isHighPair(card1, card2) || matchedSomethingInFlop(communityCards, ownCards);
 
     			System.err.println("Palying on: " + playOn);
     			
@@ -56,6 +56,21 @@ public class Player {
     	}
         return 0;
     }
+
+	private static boolean matchedSomethingInFlop(CommunityCards communityCards, OwnCards ownCards) {
+		boolean hit = false;
+		if(!communityCards.getCardList().isEmpty()){
+			for(Card ownCard : ownCards.getCardList()){
+				for(Card communityCard: communityCards.getCardList()){
+					if(ownCard.getRank() == communityCard.getRank()){
+						return true;
+					}
+				}
+			}
+		}
+		
+		return hit;
+	}
 
     private static boolean isHighPair(Card card1, Card card2){
     	return (card1.getRank() > 6) && (card1.getRank() == card2.getRank());
@@ -75,54 +90,4 @@ public class Player {
 
     public static void showdown(JsonElement game) {
     }
-    
-    private static int mapRankToInteger(String rankString){
-    	int convertedRank = 0;
-    	
-    	System.err.println("Rank as String: " + rankString);
-    	
-    	if("2".equals(rankString)){
-    		convertedRank = 2;
-    	}
-    	if("3".equals(rankString)){
-    		convertedRank = 3;
-    	}
-    	if("4".equals(rankString)){
-    		convertedRank = 4;
-    	}
-    	if("5".equals(rankString)){
-    		convertedRank = 5;
-    	}
-    	if("6".equals(rankString)){
-    		convertedRank = 6;
-    	}
-    	if("7".equals(rankString)){
-    		convertedRank = 7;
-    	}
-    	if("8".equals(rankString)){
-    		convertedRank = 8;
-    	}
-    	if("9".equals(rankString)){
-    		convertedRank = 9;
-    	}
-    	if("10".equals(rankString)){
-    		convertedRank = 10;
-    	}
-    	if("J".equals(rankString)){
-    		convertedRank = 11;
-    	}
-    	if("Q".equals(rankString)){
-    		convertedRank = 12;
-    	}
-    	if("K".equals(rankString)){
-    		convertedRank = 13;
-    	}
-    	if("A".equals(rankString)){
-    		convertedRank = 14;
-    	}
-    	
-    	return convertedRank;
-    }
-    
-    
 }

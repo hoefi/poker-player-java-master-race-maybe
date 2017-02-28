@@ -12,6 +12,7 @@ public class Player {
     		JsonElement playersElement = request.getAsJsonObject().get("players");
     		
     		boolean playOn = false;
+    		
     		if(playersElement.isJsonArray()){
     			JsonArray playersArray = playersElement.getAsJsonArray();
     			
@@ -53,7 +54,7 @@ public class Player {
     		
     	}
     	catch(Exception e){
-    		System.out.println(e.getLocalizedMessage());
+    		System.err.println(e.getLocalizedMessage());
     	}
         return 0;
     }

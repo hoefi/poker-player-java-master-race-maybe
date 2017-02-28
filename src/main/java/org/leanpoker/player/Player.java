@@ -10,15 +10,11 @@ import com.google.gson.JsonElement;
 public class Player {
 
     static final String VERSION = "Default Java folding player";
-    private static int MAX_BID = 200;
 
     public static int betRequest(JsonElement request) {
     	
-    	
     	CommunityCards communityCards = new CommunityCards(request);
     	OwnCards ownCards = new OwnCards(request);
-    	
-    	boolean isFlopAvailable = !communityCards.getCardList().isEmpty();
     	
     	try{
     		JsonElement playersElement = request.getAsJsonObject().get("players");
@@ -51,9 +47,7 @@ public class Player {
     			System.err.println("Palying on: " + playOn);
     			
     			if(playOn){
-    				if(!isFlopAvailable && highestBid < MAX_BID){
-    					return highestBid + 5;
-    				}
+    				return highestBid + 5;
     			} else {
     				return 0;
     			}

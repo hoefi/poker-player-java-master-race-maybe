@@ -47,7 +47,7 @@ public class Player {
 							System.err.println("Card2:" + rankCard2);
 							System.err.println("Card2:" + colorCard2);
 							
-							playOn = isHighPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2);
+							playOn = isHighPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2)|| isSameColorAndHighCard(rankCard1, rankCard2, colorCard1, colorCard2);
 						}
     				} 
     			}
@@ -77,8 +77,12 @@ public class Player {
 		return (rankCard1 >= 10 && rankCard2 >= 10);
 	}
 	
-	private static boolean isHighSameColorAndHighCard(int rankCard1, int rankCard2) {
-		return (rankCard1 >= 10 && rankCard2 >= 10);
+	private static boolean isSameColorAndHighCard(int rankCard1, int rankCard2, String colorCard1, String colorCard2) {
+		boolean playOn = false;
+		if(colorCard1.equals(colorCard2) && (rankCard1 >= 10 || rankCard2 >= 10)){
+			playOn = true;
+		}
+		return playOn;
 	}
 
     public static void showdown(JsonElement game) {

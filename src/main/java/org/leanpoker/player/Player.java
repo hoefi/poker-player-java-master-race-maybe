@@ -40,12 +40,12 @@ public class Player {
 							System.err.println("Card1:" + rankCard1);
 							System.err.println("Card2:" + rankCard2);
 							
-							playOn = playOn(rankCard1, rankCard2);
+							playOn = isPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2);
 						}
     				} 
     			}
     			
-    			System.err.println(playOn);
+    			System.err.println("Palying on: " + playOn);
     			
     			if(playOn){
     				return highestBid + 5;
@@ -62,8 +62,12 @@ public class Player {
         return 0;
     }
 
-	private static boolean playOn(int rankCard1, int rankCard2) {
-		return rankCard1 == rankCard2 || (rankCard1 >= 10 && rankCard2 >= 10);
+    private static boolean isPair(int rankCard1, int rankCard2){
+    	return rankCard1 == rankCard2;
+    }
+    
+	private static boolean isHighCard(int rankCard1, int rankCard2) {
+		return (rankCard1 >= 10 && rankCard2 >= 10);
 	}
 
     public static void showdown(JsonElement game) {

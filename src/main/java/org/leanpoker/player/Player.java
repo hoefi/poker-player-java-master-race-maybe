@@ -9,7 +9,7 @@ public class Player {
 
     public static int betRequest(JsonElement request) {
     	try{
-    		int maxBidAmount = 300;
+    		//int maxBidAmount = 300;
     		
     		JsonElement playersElement = request.getAsJsonObject().get("players");
     		boolean playOn = false;
@@ -24,10 +24,9 @@ public class Player {
 					if (!player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")) {
 						int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 						if (playerBet > highestBid) {
-							if(playerBet < maxBidAmount){
+							//if(playerBet < maxBidAmount){
 								highestBid = playerBet;
 								System.err.println("Set highest bid to: " + highestBid);
-							}
 						}
 					}
 				}
@@ -39,10 +38,14 @@ public class Player {
 						if(cardsElement.isJsonArray()){
 							JsonArray  cardsArray = cardsElement.getAsJsonArray();
 							int rankCard1 = mapRankToInteger(cardsArray.get(0).getAsJsonObject().get("rank").getAsString());
+							String colorCard1 = cardsArray.get(0).getAsJsonObject().get("suit").getAsString();
 							int rankCard2 = mapRankToInteger(cardsArray.get(1).getAsJsonObject().get("rank").getAsString());
+							String colorCard2 = cardsArray.get(1).getAsJsonObject().get("suit").getAsString();
 							
 							System.err.println("Card1:" + rankCard1);
+							System.err.println("Card1:" + colorCard1);
 							System.err.println("Card2:" + rankCard2);
+							System.err.println("Card2:" + colorCard2);
 							
 							playOn = isHighPair(rankCard1, rankCard2) || isHighCard(rankCard1, rankCard2);
 						}

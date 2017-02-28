@@ -11,6 +11,11 @@ public class Player {
 
     public static int betRequest(JsonElement request) {
     	JsonArray asJsonArray = request.getAsJsonArray();
+    	System.out.println(request);
+    	
+    	for(Object o : asJsonArray){
+    		System.out.println(o.toString());
+    	}
     	
     	
         return 499;

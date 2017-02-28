@@ -23,27 +23,35 @@ public class Player {
 							int rankCard1 = mapRankToInteger(cardsArray.get(0).getAsString());
 							int rankCard2 = mapRankToInteger(cardsArray.get(1).getAsString());
 							
-							if(rankCard1 == rankCard2 || (rankCard1 >= 10 && rankCard2 >= 10)){
+							System.err.println("Rank Card1: " + rankCard1);
+							System.err.println("Rank Card2: " + rankCard2);
+							
+							if(playOn(rankCard1, rankCard2)){
 								if(!player.getAsJsonObject().get("name").equals("Java Master Race Maybe")){
 			    					int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 									if(playerBet > highestBid){
 			    						highestBid = playerBet;
 			    					}
 			    				}
+								highestBid += 5;
 							}
 						}
     				}
     			}
     				
-    			return highestBid + 5;
+    			return highestBid;
     		}
     		
     	}
     	catch(Exception e){
     		System.out.println(e.getLocalizedMessage());
     	}
-        return (int) (Math.random()*1000);
+        return 0;
     }
+
+	private static boolean playOn(int rankCard1, int rankCard2) {
+		return rankCard1 == rankCard2 || (rankCard1 >= 10 && rankCard2 >= 10);
+	}
 
     public static void showdown(JsonElement game) {
     }

@@ -43,25 +43,16 @@ public class Player {
 				Card card1 = ownCards.getCardList().get(0);
 				Card card2 = ownCards.getCardList().get(1);
 				
-				boolean matchedInFlop = matchedSomethingInFlop(communityCards, ownCards);
-				boolean isHighPair = isHighPair(card1, card2);
-				boolean isHighCard = isHighCard(card1, card2);
-				boolean isSameColorAndHighCard = isSameColorAndHighCard(card1, card2);
-				
-				playOn = isHighPair 
-						|| isHighCard 
-						|| isSameColorAndHighCard 
-						|| matchedInFlop;
+				playOn = isHighPair(card1, card2) 
+						|| isHighCard(card1, card2) 
+						|| isSameColorAndHighCard(card1, card2) 
+						|| matchedSomethingInFlop(communityCards, ownCards);
 
     			System.err.println("Palying on: " + playOn);
     			
     			if(playOn){
     				if(!isFlopAvailable && highestBid < MAX_BID){
     					return highestBid + 5;
-    				} else if (matchedInFlop && isHighPair){
-    					return highestBid + 200;
-    				} else {
-    					return 0;
     				}
     			} else {
     				return 0;

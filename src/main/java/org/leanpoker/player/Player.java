@@ -27,9 +27,12 @@ public class Player {
 						}
 					}
 				}
+				boolean wasOnceInside = false;
     			
     			for(JsonElement player : playersArray){
     				if(player.getAsJsonObject().get("name").equals("Java Master Race Maybe")){
+    					wasOnceInside = true;
+    					
     					JsonElement cardsElement = player.getAsJsonObject().get("hole_cards");
 						if(cardsElement.isJsonArray()){
 							JsonArray  cardsArray = cardsElement.getAsJsonArray();
@@ -40,17 +43,19 @@ public class Player {
 							System.err.println("Card2:" + rankCard2);
 							
 							playOn = playOn(rankCard1, rankCard2);
-							
-							if(playOn){
-								return 175;
-							}
 						}
-    				} else {
-    					return 750;
-    				}
+    				} 
     			}
-    				
-    			return 0;
+    			
+    			if(playOn){
+    				return 175;
+    			} else if (wasOnceInside){
+    				return 150;
+    			} else {
+    				return 0;
+    			}
+    			
+    			
     		}
     		
     	}

@@ -9,6 +9,8 @@ public class Player {
 
     public static int betRequest(JsonElement request) {
     	try{
+    		int maxBidAmount = 300;
+    		
     		JsonElement playersElement = request.getAsJsonObject().get("players");
     		boolean playOn = false;
     		
@@ -22,8 +24,10 @@ public class Player {
 					if (!player.getAsJsonObject().get("name").getAsString().contains("Java Master Race Maybe")) {
 						int playerBet = player.getAsJsonObject().get("bet").getAsInt();
 						if (playerBet > highestBid) {
-							highestBid = playerBet;
-							System.err.println("Set highest bid to: " + highestBid);
+							if(playerBet < maxBidAmount){
+								highestBid = playerBet;
+								System.err.println("Set highest bid to: " + highestBid);
+							}
 						}
 					}
 				}

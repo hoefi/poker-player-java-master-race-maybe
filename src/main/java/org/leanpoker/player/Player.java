@@ -69,46 +69,48 @@ public class Player {
     public static void showdown(JsonElement game) {
     }
     
-    private static int mapRankToInteger(String rankStrink){
+    private static int mapRankToInteger(String rankString){
     	int convertedRank = 0;
     	
-    	if("2".equals(rankStrink)){
+    	System.err.println("Rank as String: " + rankString);
+    	
+    	if("2".equals(rankString)){
     		convertedRank = 2;
     	}
-    	if("3".equals(rankStrink)){
+    	if("3".equals(rankString)){
     		convertedRank = 3;
     	}
-    	if("4".equals(rankStrink)){
+    	if("4".equals(rankString)){
     		convertedRank = 4;
     	}
-    	if("5".equals(rankStrink)){
+    	if("5".equals(rankString)){
     		convertedRank = 5;
     	}
-    	if("6".equals(rankStrink)){
+    	if("6".equals(rankString)){
     		convertedRank = 6;
     	}
-    	if("7".equals(rankStrink)){
+    	if("7".equals(rankString)){
     		convertedRank = 7;
     	}
-    	if("8".equals(rankStrink)){
+    	if("8".equals(rankString)){
     		convertedRank = 8;
     	}
-    	if("9".equals(rankStrink)){
+    	if("9".equals(rankString)){
     		convertedRank = 9;
     	}
-    	if("10".equals(rankStrink)){
+    	if("10".equals(rankString)){
     		convertedRank = 10;
     	}
-    	if("J".equals(rankStrink)){
+    	if("J".equals(rankString)){
     		convertedRank = 11;
     	}
-    	if("Q".equals(rankStrink)){
+    	if("Q".equals(rankString)){
     		convertedRank = 12;
     	}
-    	if("K".equals(rankStrink)){
+    	if("K".equals(rankString)){
     		convertedRank = 13;
     	}
-    	if("A".equals(rankStrink)){
+    	if("A".equals(rankString)){
     		convertedRank = 14;
     	}
     	

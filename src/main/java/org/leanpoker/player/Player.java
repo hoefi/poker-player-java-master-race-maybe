@@ -20,11 +20,11 @@ public class Player {
     					JsonElement cardsElement = player.getAsJsonObject().get("hole_cards");
 						if(cardsElement.isJsonArray()){
 							JsonArray  cardsArray = cardsElement.getAsJsonArray();
-							int rankCard1 = mapRankToInteger(cardsArray.get(0).getAsString());
-							int rankCard2 = mapRankToInteger(cardsArray.get(1).getAsString());
+							int rankCard1 = mapRankToInteger(cardsArray.get(0).getAsJsonObject().get("rank").getAsString());
+							int rankCard2 = mapRankToInteger(cardsArray.get(1).getAsJsonObject().get("rank").getAsString());
 							
-							System.err.println("Rank Card1: " + rankCard1);
-							System.err.println("Rank Card2: " + rankCard2);
+							System.err.println("Card1:" + rankCard1);
+							System.err.println("Card2:" + rankCard2);
 							
 							if(playOn(rankCard1, rankCard2)){
 								if(!player.getAsJsonObject().get("name").equals("Java Master Race Maybe")){
